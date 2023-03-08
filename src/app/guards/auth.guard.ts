@@ -19,12 +19,12 @@ export class AuthGuard implements CanMatch {
       return this.unauthenticated()
     }
 
-    return new Promise(res => {
-      const createdUser = this.spotifyService.initUser()
+    return new Promise(async res => {
+      const createdUser = await this.spotifyService.initUser()
       if(!!createdUser) {
         res(true)
       } else {
-        res(false)
+        res(this.unauthenticated())
       }
     });
   }
