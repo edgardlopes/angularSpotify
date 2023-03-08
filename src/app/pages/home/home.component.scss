@@ -4,12 +4,25 @@
     display: flex;
     justify-content: space-between;
 
+    ::-webkit-scrollbar{
+        width: 7px;
+
+        &-thumb {
+            background-color: rgba($primary-color, $alpha: .2);
+            border-radius: 10px;
+        }
+
+        &-track {
+            background: transparent;
+        }
+    }
+
     .my-songs {
         padding: 0px 50px;
         padding-bottom: 20px;
         width: 100%;
         max-height: 100vh;
-        overflow-y: scroll  ;
+        overflow-y: scroll;
     }
 
     .right-panel {
