@@ -4,7 +4,34 @@
     </span>
 
     <app-top-artist class="mt-2 d-block"></app-top-artist>
+
+    <span class="title-bg mt-4">
+        Musicas curtidas
+    </span>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th class="w-5">#</th>
+                <th class="w-35">Titulo</th>
+                <th class="w-30">Artista</th>
+                <th class="w-10 right">Tempo</th>
+                <th class="w-20">Album</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let song of songs" (click)="playSong(song)">
+                <td>
+                    <fa-icon class="play" [icon]="iconPlay"></fa-icon>
+                </td>
+                <td>{{song.title}}</td>
+                <td>{{getArtists(song)}}</td>
+                <td class="right">{{song.time}}</td>
+                <td>{{song.album.name}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <div class="right-panel">
-
+    <app-right-panel></app-right-panel>
 </div>

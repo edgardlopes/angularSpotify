@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { SpotifyConfiguration } from 'src/environments/environment';
 import Spotify from 'spotify-web-api-js'
 import { User } from '../types/User';
-import { parseSpotifyArtist, parseSpotifyPlaylist, ParseSpotifyUser } from '../common/spotifyHelper';
+import { parseSpotifyArtist, parseSpotifyPlaylist, parseSpotifyTrack, ParseSpotifyUser } from '../common/spotifyHelper';
 import { Playlist } from '../types/Playlist';
 import { Router } from '@angular/router';
 import { Artist } from '../types/Artist';
+import { Song } from '../types/Song';
 
 @Injectable({
   providedIn: 'root'
@@ -81,16 +82,26 @@ export class SpotifyService {
     return playlists.items.map(parseSpotifyPlaylist)
   }
 
-  async getTopArtists(limit = 10, offset = 0): Promise<any> {
+  async getTopArtists(limit = 10, offset = 0): Promise<Artist[]> {
     const artists = await this.spotifyApi.getMyTopArtists({ limit, offset })
 
     return artists.items.map(parseSpotifyArtist)
   }
+
+  async getLikedSongs(limit = 50, offset = 0): Promise<Song[]> {
+    const songs = await this.spotifyApi.getMySavedTracks({ limit, offset })
+
+    return songs.items.map(({track}) => parseSpotifyTrack(track))
+  } 
 
   logout() {
     localStorage.clear()
     this.router.navigate(['/login'])
   }
 
+  async playSong(song: Song) {
+    await this.spotifyApi.queue(song.id);
+    await this.spotifyApi.skipToNext();
+  }
 
 }
