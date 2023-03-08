@@ -94,6 +94,13 @@ export class SpotifyService {
     return songs.items.map(({track}) => parseSpotifyTrack(track))
   } 
 
+  async getPlayingSong(): Promise<Song> {
+    const song = await this.spotifyApi.getMyCurrentPlayingTrack();
+
+    return parseSpotifyTrack(song.item!);
+
+  }
+
   logout() {
     localStorage.clear()
     this.router.navigate(['/login'])

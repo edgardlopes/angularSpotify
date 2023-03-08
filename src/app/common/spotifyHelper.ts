@@ -3,6 +3,7 @@ import { Artist } from "../types/Artist";
 import { Playlist } from "../types/Playlist";
 import { Song } from "../types/Song";
 import { User } from "../types/User";
+import { newSong } from "./factories";
 
 export function ParseSpotifyUser(user: SpotifyApi.CurrentUsersProfileResponse): User {
     return {
@@ -29,7 +30,10 @@ export function parseSpotifyArtist(artist: SpotifyApi.ArtistObjectFull): Artist 
 }
 
 export function parseSpotifyTrack(track: SpotifyApi.TrackObjectFull): Song {
-    
+    if(!track) {
+        return newSong()
+    }
+
     const msToMinutes = (ms: number) => {
         const date = addMilliseconds(new Date(0), ms)
         return format(date, 'mm:ss')
