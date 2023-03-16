@@ -10,6 +10,11 @@ import { UserFooterComponent } from 'src/app/components/user-footer/user-footer.
 import { HomeComponent } from '../home/home.component';
 import { TopArtistComponent } from 'src/app/components/top-artist/top-artist.component';
 import { RightPanelComponent } from 'src/app/components/right-panel/right-panel.component';
+import { RecentSearchComponent } from 'src/app/components/recent-search/recent-search.component';
+import { FormsModule } from '@angular/forms';
+import { TopArtistsComponent } from 'src/app/components/top-artists/top-artists.component';
+import { ArtistImageItemComponent } from 'src/app/components/artist-image-item/artist-image-item.component';
+import { PlayerCardComponent } from 'src/app/components/player-card/player-card.component';
 
 @NgModule({
   declarations: [
@@ -19,11 +24,16 @@ import { RightPanelComponent } from 'src/app/components/right-panel/right-panel.
     UserFooterComponent,
     HomeComponent,
     TopArtistComponent,
-    RightPanelComponent
+    ArtistImageItemComponent,
+    TopArtistsComponent,
+    RightPanelComponent,
+    RecentSearchComponent,
+    PlayerCardComponent
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
+    FormsModule,
     RouterModule.forChild(PlayerRoutes)
   ]
 })

@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 :host {
     display: flex;
     flex-direction: column;
@@ -6,5 +8,9 @@
     max-width: 300px;
     width: 300px;
     padding: 40px 20px 20px 20px ;
-    background-color: #fff;
+    background-color: $bg-color;
+
+    .player {
+        flex-grow: 1;
+    }
 }

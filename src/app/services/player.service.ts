@@ -10,12 +10,16 @@ import { SpotifyService } from './spotify.service';
 export class PlayerService {
 
   currentSong = new BehaviorSubject<Song>(newSong());
+  isPlaying = new BehaviorSubject<boolean>(false);
 
   timerId: any = null
+  playingPollId = null
+
+
+
 
   constructor(private spotifyService: SpotifyService) { 
     this.getPlayingSong()
-
   }
 
   async getPlayingSong() {
@@ -26,14 +30,41 @@ export class PlayerService {
 
     this.timerId = setInterval(async () => {
       const song = await this.spotifyService.getPlayingSong();
+      const isPlaying = await this.spotifyService.isPlaying()
+      
       this.setCurrentSong(song)
+      this.setPlaying(isPlaying)
     }, 3000);
+  }
+
+  async setPlaying(playing: boolean) {
+    this.isPlaying.next(playing)
   }
 
   async setCurrentSong(song: Song) {
     this.currentSong.next(song)
   }
 
+  previousSong() {
+    this.spotifyService.previousSong()
+  }
+
+  nextSong() {
+    this.spotifyService.nextSong()
+  }
+
+  playPause() {
+    console.log('isPLaying', this.isPlaying.value)
+    
+    if(this.isPlaying.value) {
+      this.spotifyService.pause()
+    } else {
+      this.spotifyService.play()
+    }
+
+  }
+
+  
 
 
 }

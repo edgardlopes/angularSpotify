@@ -12,6 +12,7 @@ import { Song } from '../types/Song';
   providedIn: 'root'
 })
 export class SpotifyService {
+
   spotifyApi: Spotify.SpotifyWebApiJs = new Spotify() ;
   user: User | undefined;
 
@@ -110,5 +111,27 @@ export class SpotifyService {
     await this.spotifyApi.queue(song.id);
     await this.spotifyApi.skipToNext();
   }
+
+  async previousSong() {
+    await this.spotifyApi.skipToPrevious();
+  }
+
+  async nextSong() {
+    await this.spotifyApi.skipToNext()
+  }
+
+  async isPlaying() {
+    const playback = await this.spotifyApi.getMyCurrentPlaybackState()
+    return playback.is_playing;
+  }
+
+  async play() {
+    await this.spotifyApi.play();
+  }
+
+  async pause() {
+    await this.spotifyApi.pause();
+  }
+
 
 }
