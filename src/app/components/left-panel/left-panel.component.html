@@ -23,7 +23,7 @@
                 *ngFor="let pl of userPlaylists"
                 [description]="pl.name" 
                 [active]="activeMenu === pl.id" 
-                (click)="buttonClick(pl.id)"
+                (click)="playlistClick(pl.id)"
             >
                 <fa-icon [icon]="playlist"></fa-icon>
             </app-menu-button>

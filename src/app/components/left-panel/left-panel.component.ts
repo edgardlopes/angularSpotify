@@ -28,6 +28,11 @@ export class LeftPanelComponent {
     this.router.navigateByUrl('player/home')
   }
 
+  playlistClick(playlistId: string) {
+    this.activeMenu = playlistId
+    this.router.navigateByUrl(`player/list/playlist/${playlistId}`)
+  }
+
   async fetchPlaylists() {
     this.userPlaylists = await this.spotifyService.getUserPlaylist();
   }

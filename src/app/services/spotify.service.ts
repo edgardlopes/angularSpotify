@@ -12,7 +12,6 @@ import { Song } from '../types/Song';
   providedIn: 'root'
 })
 export class SpotifyService {
-
   spotifyApi: Spotify.SpotifyWebApiJs = new Spotify() ;
   user: User | undefined;
 
@@ -131,6 +130,26 @@ export class SpotifyService {
 
   async pause() {
     await this.spotifyApi.pause();
+  }
+
+  async getTracks(type: string, id: string): Promise<Song[]> {
+    if(type === 'artist') {
+      const result = await this.spotifyApi.getArtistTopTracks(id, 'US');
+      return result.tracks.map(parseSpotifyTrack)
+    } else {
+      const result = await this.spotifyApi.getPlaylistTracks(id);
+      return result.items.map(item => item.track as SpotifyApi.TrackObjectFull).map(parseSpotifyTrack)
+    }
+  }
+
+  async getTitleAndBannerUrl(type: string, id: string): Promise<{ url: any; title: any; }> {
+    if(type === 'artist') {
+      const result = await this.spotifyApi.getArtist(id)
+      return { title: result.name, url: result.images[0].url }
+    } else {
+      const result = await this.spotifyApi.getPlaylist(id);
+      return { title: result.name, url: result.images[0].url }
+    }  
   }
 
 
