@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { newSong } from 'src/app/common/factories';
+import { PlayerService } from 'src/app/services/player.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 import { Song } from 'src/app/types/Song';
 
@@ -12,6 +13,7 @@ import { Song } from 'src/app/types/Song';
   styleUrls: ['./list-tracks.component.scss']
 })
 export class ListTracksComponent implements OnInit, OnDestroy {
+
   subs: Subscription[] = [];  
 
   bannerImageUrl = ''
@@ -24,7 +26,9 @@ export class ListTracksComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private spotifyService: SpotifyService) {
+    private spotifyService: SpotifyService,
+    private playerService: PlayerService
+    ) {
 
   }
   
@@ -59,4 +63,8 @@ export class ListTracksComponent implements OnInit, OnDestroy {
 
   
 
+  playSong(song: Song) {
+    console.log('here')
+    this.spotifyService.playSong(song);
+  }
 }

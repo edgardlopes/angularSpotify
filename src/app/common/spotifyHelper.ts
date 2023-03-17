@@ -29,7 +29,11 @@ export function parseSpotifyArtist(artist: SpotifyApi.ArtistObjectFull): Artist 
     }
 }
 
-export function parseSpotifyTrack(track: SpotifyApi.TrackObjectFull): Song {
+export function parseSpotifyTrack(track: SpotifyApi.TrackObjectFull | null): Song {
+    if(!track) {
+        return newSong()
+    }
+
     const msToMinutes = (ms: number) => {
         const date = addMilliseconds(new Date(0), ms)
         return format(date, 'mm:ss')

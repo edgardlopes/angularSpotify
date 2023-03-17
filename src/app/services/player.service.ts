@@ -16,8 +16,6 @@ export class PlayerService {
   playingPollId = null
 
 
-
-
   constructor(private spotifyService: SpotifyService) { 
     this.getPlayingSong()
   }
@@ -25,13 +23,11 @@ export class PlayerService {
   async getPlayingSong() {
     clearTimeout(this.timerId)
 
-    const song = await this.spotifyService.getPlayingSong()
-    this.setCurrentSong(song)
-
     this.timerId = setInterval(async () => {
-      const song = await this.spotifyService.getPlayingSong();
-      const isPlaying = await this.spotifyService.isPlaying()
+      const {isPlaying, track: song} = await this.spotifyService.playbackState()
       
+
+
       this.setCurrentSong(song)
       this.setPlaying(isPlaying)
     }, 3000);

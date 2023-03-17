@@ -13,10 +13,10 @@ export class ArtistImageItemComponent {
   imageUrl = ''
 
   @Output()
-  click = new EventEmitter<void>()
+  artistClicked = new EventEmitter<void>()
 
   onClick() {
-    this.click.emit()
+    this.artistClicked.emit()
   }
 
 }

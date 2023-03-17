@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
 import { Artist } from 'src/app/types/Artist';
 
@@ -8,10 +9,9 @@ import { Artist } from 'src/app/types/Artist';
   styleUrls: ['./top-artists.component.scss']
 })
 export class TopArtistsComponent implements OnInit {
-
   artists: Artist[] = []
 
-  constructor(private spotifyService: SpotifyService){
+  constructor(private router: Router, private spotifyService: SpotifyService){
 
   }
 
@@ -24,6 +24,8 @@ export class TopArtistsComponent implements OnInit {
     console.log(this.artists)
   }
 
-  
+  artistClicked(artist: any) {
+    this.router.navigateByUrl(`player/list/artist/${artist.id}`)
+  }
 
 }

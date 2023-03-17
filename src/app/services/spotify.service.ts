@@ -119,9 +119,12 @@ export class SpotifyService {
     await this.spotifyApi.skipToNext()
   }
 
-  async isPlaying() {
+  async playbackState(): Promise<{isPlaying: boolean; track: Song}> {
     const playback = await this.spotifyApi.getMyCurrentPlaybackState()
-    return playback.is_playing;
+    return {
+      isPlaying: playback.is_playing,
+      track: parseSpotifyTrack(playback.item)
+    };
   }
 
   async play() {

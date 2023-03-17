@@ -17,6 +17,7 @@ import { ArtistImageItemComponent } from 'src/app/components/artist-image-item/a
 import { PlayerCardComponent } from 'src/app/components/player-card/player-card.component';
 import { ListTracksComponent } from 'src/app/components/list-tracks/list-tracks.component';
 import { BannerComponent } from 'src/app/components/banner/banner.component';
+import { TracksTableComponent } from 'src/app/components/tracks-table/tracks-table.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BannerComponent } from 'src/app/components/banner/banner.component';
     RecentSearchComponent,
     PlayerCardComponent,
     ListTracksComponent,
-    BannerComponent
+    BannerComponent,
+    TracksTableComponent
   ],
   imports: [
     CommonModule,

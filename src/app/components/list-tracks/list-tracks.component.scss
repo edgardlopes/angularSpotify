@@ -1,0 +1,32 @@
+@import 'variables.scss';
+
+
+:host {
+    display: flex;
+    justify-content: space-between;
+
+    ::-webkit-scrollbar{
+        width: 7px;
+
+        &-thumb {
+            background-color: rgba($primary-color, $alpha: .2);
+            border-radius: 10px;
+        }
+
+        &-track {
+            background: transparent;
+        }
+    }
+
+    .list {
+        width: 100%;
+        padding: 0px 50px;
+        padding-bottom: 20px;
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+
+    .right-panel {
+        height: 100vh;
+    }
+}
